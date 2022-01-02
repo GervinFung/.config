@@ -164,8 +164,16 @@ o.inccommand = 'nosplit' -- For viewing live substitution
 o.hidden = true -- to ensure terminal remains alive
 
 -- colorscheme
-vim.g.vscode_style = "light"
-vim.cmd [[colorscheme vscode]]
+-- vim.g.vscode_style = "light"
+-- vim.cmd [[colorscheme vscode]]
+
+-- tokyonight
+vim.cmd[[colorscheme tokyonight]]
+require('lualine').setup {
+  options = {
+    theme = 'tokyonight'
+  }
+}
 
 -- tabline colors
 vim.cmd [[
