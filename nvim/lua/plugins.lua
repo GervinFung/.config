@@ -30,6 +30,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'Mofiqul/vscode.nvim'
   Plug ('iamcco/markdown-preview.nvim', { ['do'] = 'cd app && npm install' })
   Plug 'phaazon/hop.nvim'
-  Plug ('folke/tokyonight.nvim', {branch = 'main' })
+  Plug ('folke/tokyonight.nvim', {branch = 'main'})
+  Plug 'neoclide/jsonc.vim'
 vim.call('plug#end')
 

@@ -24,7 +24,6 @@
   "errorLens.warningTextColor": "rgba(180,180,0,0.4)",
   "editor.guides.highlightActiveIndentation": true,
   "editor.guides.bracketPairsHorizontal": "active",
-  "editor.fontLigatures": true,
   "editor.guides.bracketPairs": "active",
   "editor.bracketPairColorization.enabled": true,
   "editor.fontSize": 12,
@@ -42,5 +41,7 @@
   "files.trimTrailingWhitespace": true,
   "[markdown]": {
     "files.trimTrailingWhitespace": false
-  }
+  },
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontLigatures": true
 }
