@@ -11,7 +11,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/plugged')
   -- Packer can manage itself
   Plug 'wbthomason/packer.nvim'
-  Plug ('neoclide/coc.nvim', {branch = 'release'})
+  Plug ('neoclide/coc.nvim', { branch = 'release' })
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
@@ -27,10 +27,10 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'windwp/nvim-autopairs'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'alvarosevilla95/luatab.nvim'
-  Plug 'Mofiqul/vscode.nvim'
   Plug ('iamcco/markdown-preview.nvim', { ['do'] = 'cd app && npm install' })
   Plug 'phaazon/hop.nvim'
-  Plug ('folke/tokyonight.nvim', {branch = 'main'})
   Plug 'neoclide/jsonc.vim'
+  Plug 'Mofiqul/vscode.nvim'
+  -- Plug 'mhinz/vim-startify'
 vim.call('plug#end')
 

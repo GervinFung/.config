@@ -8,12 +8,19 @@
     "json",
     "javascriptreact",
     "typescriptreact",
-    "graphql"
+    "graphql",
+    "html",
+    "julia",
+    "sql",
+    "lua"
   ],
   "coc.preferences.useQuickfixForLocations": true,
   "explorer.icon.enableNerdfont": true,
-  "tsserver.maxTsServerMemory": 2000,
+  "explorer.width": 30,
   "explorer.file.showHiddenFiles": true,
+  "tsserver.maxTsServerMemory": 2000,
   "coc.preferences.jumpCommand": "tab drop",
-  "prettier.tabWidth": 4
+  "prettier.tabWidth": 4,
+  "prettier.semi": true,
+  "prettier.singleQuote": true
 }

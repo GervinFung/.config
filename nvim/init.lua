@@ -30,7 +30,7 @@ require('nvim-treesitter.configs').setup({
 require('nvim-autopairs').setup({})
 
 -- COC settings
-g.coc_global_extensions = {'coc-json', 'coc-explorer', 'coc-tsserver', 'coc-prettier'}
+g.coc_global_extensions = {'coc-json', 'coc-explorer', 'coc-tsserver', 'coc-prettier', 'coc-julia'}
 -- Open file tree explorer (N-erdTree)
 nnoremap('<Leader>n', ':CocCommand explorer<CR>')
 g.coc_enable_locationlist = 0
@@ -45,7 +45,6 @@ vim.cmd [[
   nmap <silent> gh :call Show_documentation()<CR>
   nmap <silent> <Leader>, :CocAction<CR>
   nmap <Leader>r <Plug>(coc-rename)
-
   function! Show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
       execute 'h '.expand('<cword>')
@@ -55,18 +54,22 @@ vim.cmd [[
       execute '!' . &keywordprg . " " . expand('<cword>')
     endif
   endfunction
-  
+
   try
       nmap <Leader>e :call CocAction('diagnosticNext')<cr>
       nmap <Leader>E :call CocAction('diagnosticPrevious')<cr>
   endtry
-
   " Press Enter to use the first suggestion
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 ]]
 
+-- autocmd VimEnter * call Start()
+-- vim.cmd('source start.vim')
+
+-- require('startup')
+
 -- lualine settings
-require('lualine').setup({ 
+require('lualine').setup({
   sections = {
     lualine_a = {{'filename', path = 1}},
     lualine_b = {'g:coc_status'},
@@ -91,7 +94,7 @@ require('diffview').setup({
 -- telescope settings
 require('telescope').setup({
   defaults = {
-    preview = false
+    previewer = true
   }
 })
 
@@ -104,7 +107,7 @@ require('neogit').setup({
 })
 
 -- https://github.com/alvarosevilla95/luatab.nvim
-require('luatab').setup({})  
+require('luatab').setup({})
 
 -- https://github.com/phaazon/hop.nvim
 require('hop').setup({ keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 })
@@ -113,16 +116,16 @@ require('hop').setup({ keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 })
 nnoremap('<CR>', ':wa<CR>')
 nnoremap('<C-j>', ':cnext<CR>')
 nnoremap('<C-k>', ':cprev<CR>')
--- Open [g]it dashboard 
+-- Open [g]it dashboard
 nnoremap('<Leader>g', ':tab Git<CR>')
--- Open [G]it diffs 
+-- Open [G]it diffs
 nnoremap('<Leader>G', ':DiffviewOpen<CR>')
--- For opening Git [d]iff of current file vertically 
+-- For opening Git [d]iff of current file vertically
 nnoremap('<Leader>d', ':vert Gdiff<CR>')
 -- [s]earch and replace
-nnoremap('<leader>s', ':lua require("spectre").open() <CR>')
+nnoremap('<Leader>r', ':lua require("spectre").open() <CR>')
 -- [s]earch current highlighted word
-vnoremap('<leader>s', ':lua require("spectre").open_visual() <CR>')
+vnoremap('<Leader>s', ':lua require("spectre").open_visual() <CR>')
 -- Open file search (follows VSCode Cmd+p)
 nnoremap('<Leader>p', ':Telescope git_files<CR>')
 -- Open command pallete (follows VSCode Cmd+shift+p)
@@ -144,15 +147,15 @@ nnoremap('<Leader>t', ':HopWord<CR>')
 -- vim settings
 o.clipboard = o.clipboard .. 'unnamedplus'
 o.number = true
-o.relativenumber = true
+o.relativenumber = false
 o.autowrite = true
 o.smartcase = true
-o.ignorecase = true
-o.tabstop = 2
+o.ignorecase = false
+o.tabstop = 4
 o.shiftwidth = 2
 o.shell = 'fish'
 o.expandtab = true
-o.wrap = false
+o.wrap = true
 o.swapfile = false
 o.cursorline = true
 o.cursorcolumn = true
@@ -163,17 +166,25 @@ o.mouse = 'a'
 o.inccommand = 'nosplit' -- For viewing live substitution
 o.hidden = true -- to ensure terminal remains alive
 
--- colorscheme
--- vim.g.vscode_style = "light"
--- vim.cmd [[colorscheme vscode]]
+-- https://github.com/iamcco/markdown-preview.nvim
+g.mkdp_auto_start = 0
+g.mkdp_auto_close = 1
+g.mkdp_refresh_slow = 0
+g.mkdp_browser = 'brave-browser'
+g.mkdp_open_ip = '127.0.0.1:1'
+-- g.mkdp_filetypes = ['markdown']
 
--- tokyonight
-vim.cmd[[colorscheme tokyonight]]
-require('lualine').setup {
-  options = {
-    theme = 'tokyonight'
-  }
-}
+-- colorscheme
+
+-- vim.cmd[[colorscheme tokyonight]]
+-- require('lualine').setup {
+--   options = {
+--     theme = 'tokyonight'
+--   }
+-- }
+
+vim.g.vscode_style = "dark"
+vim.cmd [[colorscheme vscode]]
 
 -- tabline colors
 vim.cmd [[
@@ -188,9 +199,12 @@ hi Visual guibg=yellow
 ]]
 
 -- COC colors
+-- hi CocErrorLine guibg=pink
+-- hi CocErrorVirtualText guibg=pink guifg=darkred
+-- hi CocInfoLine guibg=#fab005
+-- hi CocInfoVirtualText guibg=#fab005 guifg=darkred
 vim.cmd [[
-hi CocErrorLine guibg=pink
-hi CocErrorVirtualText guibg=pink guifg=darkred
-hi CocInfoLine guibg=#fab005
-hi CocInfoVirtualText guibg=#fab005 guifg=darkred
+hi CocErrorSign guifg=#d1666a
+hi CocInfoSign guibg=#353b45
+hi CocWarningSign guifg=#d1cd66
 ]]
