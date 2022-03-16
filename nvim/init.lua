@@ -226,15 +226,14 @@ require('colorizer').setup()
 g.dashboard_session_directory = '~/.config/nvim/.sessions'
 g.dashboard_default_executive ='telescope'
 g.dashboard_custom_section = {
-    a = {description = {"  Find File                 leader p  "}, command = "Telescope find_files"},
-    b = {description = {"  Recents                   leader f h"}, command = "Telescope oldfiles"},
-    c = {description = {"  Find Word                 leader s  "}, command = "Telescope live_grep"},
-    d = {description = {"  New File                  shift  a  "}, command = "DashboardNewFile"},
-    e = {description = {"  Bookmarks                 leader m  "}, command = "Telescope marks"},
-    f = {description = {"  Load Last Session         leader l  "}, command = "SessionLoad"},
+    a = {description = {"  Find Git File             leader p  "}, command = "Telescope git_files"},
+    b = {description = {"  Find Word                 leader s  "}, command = "Telescope live_grep"},
+    c = {description = {"  Buffer                    leader b  "}, command = "Telescope buffers"},
+    d = {description = {"  Close Buffer        leader shift b  "}, command = "Telescope marks"},
+    f = {description = {"  New Directory              shift a  "}, command = "DashboardNewFile"},
     g = {description = {"  Update Plugins            leader u  "}, command = "PackerUpdate"},
-    h = {description = {"  Settings                  leader e v"}, command = "edit $MYVIMRC"},
-    i = {description = {"  Exit                      leader q  "}, command = "exit"}
+    h = {description = {"☮  MD Preview                leader m  "}, command = "MarkdownPreview"},
+    j = {description = {"  Exit                      leader q  "}, command = "exit"}
 }
 
 vim.cmd [[
