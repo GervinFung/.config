@@ -2,18 +2,6 @@
   "diagnostic.errorSign": "▶",
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "json",
-    "javascriptreact",
-    "typescriptreact",
-    "graphql",
-    "html",
-    "julia",
-    "sql",
-    "lua"
-  ],
   "coc.preferences.useQuickfixForLocations": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.width": 30,

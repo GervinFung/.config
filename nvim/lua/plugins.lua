@@ -15,7 +15,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-surround'
-  Plug 'projekt0n/github-nvim-theme'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'windwp/nvim-spectre'
   Plug 'nvim-telescope/telescope.nvim'
@@ -27,10 +26,15 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'windwp/nvim-autopairs'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'alvarosevilla95/luatab.nvim'
-  Plug ('iamcco/markdown-preview.nvim', { ['do'] = 'cd app && npm install' })
+  Plug ('iamcco/markdown-preview.nvim', { ['do'] = 'cd app && yarn install' })
   Plug 'phaazon/hop.nvim'
   Plug 'neoclide/jsonc.vim'
+  Plug 'navarasu/onedark.nvim'
+  Plug 'p00f/nvim-ts-rainbow'
+  Plug 'norcalli/nvim-colorizer.lua'
+  Plug 'mhinz/vim-signify'
   Plug 'Mofiqul/vscode.nvim'
-  -- Plug 'mhinz/vim-startify'
+  Plug 'glepnir/dashboard-nvim'
+  Plug 'sbdchd/neoformat'
 vim.call('plug#end')
 
