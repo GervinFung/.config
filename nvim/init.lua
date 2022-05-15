@@ -200,7 +200,7 @@ g.mkdp_browser = 'brave-browser'
 
 -- colorscheme
 
-vim.g.vscode_style = "dark"
+g.vscode_style = "dark"
 vim.cmd [[colorscheme vscode]]
 
 -- require('onedark').setup  {
@@ -247,23 +247,23 @@ augroup END
 ]]
 
 g.dashboard_custom_header = {
-  "             ./oydN:                            :Ndyo/-`             ", 
-  "        `:+ydNMMMMMMs                            oMMMMMMNdy+:`       ",  
-  "    ./sdNMMMMMMMMMMMNs.                        .oNMMMMMMMMMMMNds/.   ",  
-  " `ohhdNMMMMMMMMMMMMMMMNo.        `  `        .omMMMMMMMMMMMMMMMNmhho.",  
-  " .-.``.-/oydmMMMMMMMMMMMNs/-    .h  h.    -/sNMMMMMMMMMMMmdyo/-.```-.",  
-  "           `.:mMMMMMMMMMMMMNd+- hM++Md -+dNMMMMMMMMMMMMN:.`          ",  
-  "              -NMMMMMMMMMMMMMMNdMMMMMMdNMMMMMMMMMMMMMMN:             ",  
-  "               .::://++ooymMMMMMMMMMMMMMMMMmhoo++//:::-              ",  
-  "                          ./hNMMMMMMMMMMNh/.                         ",  
-  "                             .+dNNNNNNd+-                            ",  
-  "                                -::::-                               ",  
-  "                                                                     ",  
-  "                         A wise man once said                        ",  
-  "                                                                     ",  
-  "                               “老干妈”                              ",  
-  "                               “冰淇淋”                              ",  
-  "                                                                     ",  
+  "             ./oydN:                            :Ndyo/-`             ",
+  "        `:+ydNMMMMMMs                            oMMMMMMNdy+:`       ",
+  "    ./sdNMMMMMMMMMMMNs.                        .oNMMMMMMMMMMMNds/.   ",
+  " `ohhdNMMMMMMMMMMMMMMMNo.        `  `        .omMMMMMMMMMMMMMMMNmhho.",
+  " .-.``.-/oydmMMMMMMMMMMMNs/-    .h  h.    -/sNMMMMMMMMMMMmdyo/-.```-.",
+  "           `.:mMMMMMMMMMMMMNd+- hM++Md -+dNMMMMMMMMMMMMN:.`          ",
+  "              -NMMMMMMMMMMMMMMNdMMMMMMdNMMMMMMMMMMMMMMN:             ",
+  "               .::://++ooymMMMMMMMMMMMMMMMMmhoo++//:::-              ",
+  "                          ./hNMMMMMMMMMMNh/.                         ",
+  "                             .+dNNNNNNd+-                            ",
+  "                                -::::-                               ",
+  "                                                                     ",
+  "                         A wise man once said                        ",
+  "                                                                     ",
+  "                               “老干妈”                              ",
+  "                               “冰淇淋”                              ",
+  "                                                                     ",
   "                              N E O V I M                            ",
 }
 

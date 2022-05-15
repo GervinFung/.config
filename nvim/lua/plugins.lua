@@ -19,7 +19,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'windwp/nvim-spectre'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'sindrets/diffview.nvim'  
+  Plug 'sindrets/diffview.nvim'
   Plug 'TimUntersberger/neogit'
   Plug ('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
   Plug 'windwp/nvim-ts-autotag'
@@ -37,4 +37,3 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'glepnir/dashboard-nvim'
   Plug 'sbdchd/neoformat'
 vim.call('plug#end')
-
