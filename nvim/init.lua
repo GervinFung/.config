@@ -1,13 +1,12 @@
 require('plugins')
 local o = vim.o
-local wo = vim.wo
-local bo = vim.bo
 local g = vim.g
+local api = vim.api
 local function nnoremap(key, cmd)
-  vim.api.nvim_set_keymap('n', key, cmd, { noremap = true })
+  api.nvim_set_keymap('n', key, cmd, { noremap = true })
 end
 local function vnoremap(key, cmd)
-  vim.api.nvim_set_keymap('v', key, cmd, { noremap = true })
+  api.nvim_set_keymap('v', key, cmd, { noremap = true })
 end
 
 -- Set leader
@@ -211,30 +210,25 @@ require('colorizer').setup()
 
 
 -- dashboard nvim
-g.dashboard_session_directory = '~/.config/nvim/.sessions'
-g.dashboard_default_executive ='telescope'
-g.dashboard_custom_section = {
-    a = {description = {"  Find Git File             leader p  "}, command = "Telescope git_files"},
-    b = {description = {"  Find Word                 leader s  "}, command = "Telescope live_grep"},
-    c = {description = {"  Buffer                    leader b  "}, command = "Telescope buffers"},
-    d = {description = {"  Close Buffer        leader shift b  "}, command = "Telescope marks"},
-    f = {description = {"  New Directory              shift a  "}, command = "DashboardNewFile"},
-    g = {description = {"  Update Plugins            leader u  "}, command = "PackerUpdate"},
-    h = {description = {"☮  MD Preview                leader m  "}, command = "MarkdownPreview"},
-    j = {description = {"  Exit                      leader q  "}, command = "exit"}
+local dashboard = require("dashboard")
+dashboard.session_directory = '~/.config/nvim/.sessions'
+dashboard.custom_center = {
+    {icon = '  ', desc = 'Find Git File             leader p  ', action = "Telescope git_files"},
+    {icon = '  ', desc = 'Find Word                 leader s  ', action = "Telescope live_grep"},
+    {icon = '  ', desc = 'Buffer                    leader b  ', action = "Telescope buffers"},
+    {icon = '  ', desc = 'Close Buffer        leader shift b  ', action = "Telescope marks"},
+    {icon = '  ', desc = 'New Directory              shift a  ', action = "DashboardNewFile"},
+    {icon = '  ', desc = 'Update Plugins            leader u  ', action = "PackerUpdate"},
+    {icon = '☮  ', desc = 'MD Preview                leader m  ', action = "MarkdownPreview"},
+    {icon = '  ', desc = 'Exit                      leader q  ', action = "exit"}
 }
 
-vim.cmd [[
-augroup dashboard_au
-     autocmd! * <buffer>
-     autocmd User dashboardReady let &l:stl = 'Dashboard'
-     autocmd User dashboardReady nnoremap <buffer> <leader>q <cmd>exit<CR>
-     autocmd User dashboardReady nnoremap <buffer> <leader>u <cmd>PackerUpdate<CR>
-     autocmd User dashboardReady nnoremap <buffer> <leader>l <cmd>SessionLoad<CR>
-augroup END
-]]
+dashboard.default_banner = nil
 
-g.dashboard_custom_header = {
+dashboard.custom_footer = {'',''}
+dashboard.custom_footer = {'','N E O V I M'}
+
+dashboard.custom_header = {
   "             ./oydN:                            :Ndyo/-`             ",
   "        `:+ydNMMMMMMs                            oMMMMMMNdy+:`       ",
   "    ./sdNMMMMMMMMMMMNs.                        .oNMMMMMMMMMMMNds/.   ",
@@ -247,13 +241,21 @@ g.dashboard_custom_header = {
   "                             .+dNNNNNNd+-                            ",
   "                                -::::-                               ",
   "                                                                     ",
-  "                         A wise man once said                        ",
   "                                                                     ",
-  "                               “老干妈”                              ",
-  "                               “冰淇淋”                              ",
+  "       “Slow is smooth and smooth is fast” - Chupapi Munyanyo        ",
   "                                                                     ",
-  "                              N E O V I M                            ",
+  "                                                                     ",
 }
+
+vim.cmd [[
+augroup dashboard_au
+     autocmd! * <buffer>
+     autocmd User dashboardReady let &l:stl = 'Dashboard'
+     autocmd User dashboardReady nnoremap <buffer> <leader>q <cmd>exit<CR>
+     autocmd User dashboardReady nnoremap <buffer> <leader>u <cmd>PackerUpdate<CR>
+     autocmd User dashboardReady nnoremap <buffer> <leader>l <cmd>SessionLoad<CR>
+augroup END
+]]
 
 -- tabline colors
 vim.cmd [[

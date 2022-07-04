@@ -9,3 +9,9 @@ function! neoformat#formatters#sql#sqlformatter() abort
         \ 'stdin': 1
         \ }
 endfunction
+
+function! neoformat#formatters() abort
+    return {
+        \ 'args': ['--indent-size 4'],
+        \ }
+endfunction
