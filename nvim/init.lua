@@ -12,21 +12,21 @@ end
 -- Set leader
 g.mapleader = " "
 
-
 -- Tree sitter settings
 require('nvim-treesitter.configs').setup({
-  autotag = {
-    enable = true
-  },
-  highlight = {
-    enable = true,  -- false will disable the whole extension
-    disable = { },  -- list of language that will be disabled
-  },
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-  }
+    autotag = {
+      enable = true
+    },
+    ensure_installed = "all",
+    highlight = {
+      enable = true, -- false will disable the whole extension
+      disable = {} -- list of language that will be disabled
+    },
+    rainbow = {
+      enable = true,
+      extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+      max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    }
 })
 
 -- Autopair settings
@@ -46,8 +46,13 @@ vim.cmd [[
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
   nmap <silent> gh :call Show_documentation()<CR>
-  nmap <silent> <Leader>, :CocAction<CR>
+  xmap <Leader>,  v<Plug>(coc-codeaction-selected)
+  nmap <Leader>,  v<Plug>(coc-codeaction-selected)
   nmap <Leader>r <Plug>(coc-rename)
+  nmap <silent> <leader>e <Plug>(coc-diagnostic-next-error)
+  nmap <silent> <leader>E <Plug>(coc-diagnostic-prev-error)
+  nmap <silent> <leader>w <Plug>(coc-diagnostic-next)
+  nmap <silent> <leader>W <Plug>(coc-diagnostic-prev)
   function! Show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
       execute 'h '.expand('<cword>')
@@ -58,10 +63,6 @@ vim.cmd [[
     endif
   endfunction
 
-  try
-      nmap <Leader>e :call CocAction('diagnosticNext')<cr>
-      nmap <Leader>E :call CocAction('diagnosticPrevious')<cr>
-  endtry
   " Press Enter to use the first suggestion
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 ]]
@@ -186,23 +187,23 @@ o.hidden = true -- to ensure terminal remains alive
 g.mkdp_browser = 'brave-browser'
 
 -- colorscheme
+-- g.vscode_style = "dark"
+-- vim.cmd [[colorscheme vscode]]
 
-g.vscode_style = "dark"
-vim.cmd [[colorscheme vscode]]
-
--- require('onedark').setup  {
---     -- Main options --
---     style = 'darker',
---     transparent = true,
---     code_style = {
---         comments = 'italic',
---         -- keywords = 'bold, italic',
---         -- functions = 'none',
---         strings = 'italic',
---         variables = 'bold'
---     },
--- }
--- require('onedark').load()
+local onedark = require('onedark')
+onedark.setup {
+    -- Main options --
+    style = 'darker',
+    transparent = true,
+    code_style = {
+        comments = 'italic',
+        -- keywords = 'bold, italic',
+        -- functions = 'none',
+        strings = 'italic',
+        variables = 'bold'
+    },
+}
+onedark.load()
 
 
 -- nvim-colorizer
