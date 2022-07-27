@@ -1,4 +1,4 @@
 " Refer https://github.com/TimUntersberger/neogit#notification-highlighting
-hi NeogitNotificationInfo guifg=#148C8C guibg=#000000
-hi NeogitNotificationWarning guifg=#00C800 guibg=#000000
-hi NeogitNotificationError guifg=#B4B400 guibg=#000000
+hi NeogitNotificationInfo guifg=#000000
+hi NeogitNotificationWarning guifg=#ff8c00
+hi NeogitNotificationError guifg=#8b0000
