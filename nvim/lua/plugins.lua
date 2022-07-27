@@ -36,4 +36,5 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'Mofiqul/vscode.nvim'
   Plug 'glepnir/dashboard-nvim'
   Plug 'sbdchd/neoformat'
+  Plug 'nathom/filetype.nvim'
 vim.call('plug#end')
