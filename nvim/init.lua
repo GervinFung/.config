@@ -1,3 +1,3 @@
 require('plugins')
-require('vim')
 require('config')
+require('vim')
