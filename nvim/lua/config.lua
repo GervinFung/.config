@@ -122,3 +122,6 @@ dashboard.custom_header = {
 
 -- File Type
 require("filetype")
+
+-- Git Signs
+require('gitsigns').setup()
