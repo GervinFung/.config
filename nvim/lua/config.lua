@@ -61,18 +61,16 @@ require('luatab').setup({})
 require('hop').setup({ keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 })
 
 -- colorscheme
--- g.vscode_style = "dark"
--- vim.cmd [[colorscheme vscode]]
-
 local onedark = require('onedark')
 onedark.setup {
     -- Main options --
-    style = 'darker',
+    -- style - dark, darker, cool, deep, warm, warmer
+    style = 'deep',
     transparent = true,
     code_style = {
         comments = 'italic',
-        -- keywords = 'bold, italic',
-        -- functions = 'none',
+        keywords ='bold,italic',
+        functions = 'none',
         strings = 'italic',
         variables = 'bold'
     },
@@ -93,7 +91,7 @@ dashboard.custom_center = {
     {icon = '  ', desc = 'New Directory              shift a  ', action = "DashboardNewFile"},
     {icon = '  ', desc = 'Update Plugins            leader u  ', action = "PackerUpdate"},
     {icon = '☮  ', desc = 'MD Preview                leader m  ', action = "MarkdownPreview"},
-    {icon = '  ', desc = 'Exit                      leader q  ', action = "exit"}
+    {icon = '  ', desc = 'Exit                      leader q  ', action = "Exit"}
 }
 
 dashboard.default_banner = nil

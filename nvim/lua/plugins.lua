@@ -32,9 +32,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'navarasu/onedark.nvim'
   Plug 'p00f/nvim-ts-rainbow'
   Plug 'norcalli/nvim-colorizer.lua'
-  Plug 'Mofiqul/vscode.nvim'
   Plug 'glepnir/dashboard-nvim'
   Plug 'sbdchd/neoformat'
-  Plug 'nathom/filetype.nvim'
   Plug 'lewis6991/gitsigns.nvim'
 vim.call('plug#end')

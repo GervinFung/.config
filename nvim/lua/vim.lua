@@ -96,6 +96,8 @@ nnoremap('<Leader>l', ':noh<CR>')
 nnoremap('<Leader>q', ':q<CR>')
 -- Close buffer
 nnoremap('<Leader>B', ':bd<CR>')
+-- Packer Update
+nnoremap('<Leader>u', ':PackerUpdate<CR>')
 
 -- vim settings
 o.clipboard = o.clipboard .. 'unnamedplus'
