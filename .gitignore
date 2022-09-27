@@ -12,3 +12,5 @@
 !qutebrowser
 !spectrwm
 !.gitignore
+!tmux
+!fish/conf.d
