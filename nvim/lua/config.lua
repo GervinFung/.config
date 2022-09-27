@@ -69,7 +69,7 @@ onedark.setup {
     transparent = true,
     code_style = {
         comments = 'italic',
-        keywords ='bold,italic',
+        keywords = 'bold,italic',
         functions = 'none',
         strings = 'italic',
         variables = 'bold'
@@ -117,9 +117,6 @@ dashboard.custom_header = {
   "                                                                     ",
   "                                                                     ",
 }
-
--- File Type
-require("filetype")
 
 -- Git Signs
 require('gitsigns').setup()
