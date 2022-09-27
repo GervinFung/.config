@@ -7,6 +7,15 @@
   "explorer.width": 30,
   "explorer.file.showHiddenFiles": true,
   "tsserver.maxTsServerMemory": 2000,
+  "tsserver.enableJavascript": false,
   "coc.preferences.jumpCommand": "tab drop",
-  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.0/clangd_14.0.0/bin/clangd"
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.0/clangd_14.0.0/bin/clangd",
+  "languageserver": {
+    "graphql": {
+      "command": "graphql-lsp",
+      "args": ["server", "-m", "stream"],
+      "filetypes": ["typescript", "typescriptreact", "graphql"],
+      "trace.server": "verbose"
+    }
+  }
 }
