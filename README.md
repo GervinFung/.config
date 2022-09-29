@@ -12,5 +12,5 @@ mv ~/.config ~/.config_backup
 ## Installation
 
 ```sh
-git clone https://github.com/GervinFung/.config.git ~/.config
+git clone https://github.com/GervinFung/.config.git ~/.config && cd nvim && make
 ```
