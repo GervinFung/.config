@@ -405,11 +405,6 @@ vim.cmd([[
   hi TabLineFill guibg=#3C3836
 ]])
 
--- floating windows color
-vim.cmd([[
-  hi Visual guibg=yellow
-]])
-
 -- File Type
 -- Do not source the default filetype.vim
 g.did_load_filetypes = 1
@@ -439,13 +434,13 @@ keymap.set("n", "<space>E", function()
 	vim.diagnostic.goto_prev({ severity = severity.ERROR })
 end, opts)
 keymap.set("n", "<space>W", function()
-	vim.diagnostic.goto_prev({ severity = severity.WARN })
+	vim.diagnostic.goto_prev({ severity = { max = severity.WARN } })
 end, opts)
 keymap.set("n", "<space>e", function()
 	vim.diagnostic.goto_next({ severity = severity.ERROR })
 end, opts)
 keymap.set("n", "<space>w", function()
-	vim.diagnostic.goto_next({ severity = severity.WARN })
+	vim.diagnostic.goto_next({ severity = { max = severity.WARN } })
 end, opts)
 
 -- LSP Lines (https://git.sr.ht/~whynothugo/lsp_lines.nvim#installation)
