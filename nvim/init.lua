@@ -1,5 +1,9 @@
 require("plugins")
 
+local o = vim.o
+local g = vim.g
+local api = vim.api
+
 -- Tree sitter settings
 require("nvim-treesitter.configs").setup({
 	autotag = {
@@ -155,14 +159,23 @@ end
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lsp_options = {
-	on_attach = on_attach,
+	on_attach,
 	capabilities,
 }
 
 local lspconfig = require("lspconfig")
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
-lspconfig.tsserver.setup(lsp_options)
+lspconfig.tsserver.setup({
+	on_attach = lsp_options.on_attach,
+	capabilities = lsp_options.capabilities,
+	init_options = {
+		preferences = {
+			-- Refer https://github.com/typescript-language-server/typescript-language-server/pull/218#issue-915599035
+			importModuleSpecifierPreference = "relative",
+		},
+	},
+})
 
 lspconfig.rust_analyzer.setup(lsp_options)
 
@@ -215,7 +228,6 @@ dashboard.custom_center = {
 
 dashboard.default_banner = nil
 
-dashboard.custom_footer = { "", "" }
 dashboard.custom_footer = { "", "N E O V I M" }
 
 dashboard.custom_header = {
@@ -232,7 +244,7 @@ dashboard.custom_header = {
 	"                                -::::-                               ",
 	"                                                                     ",
 	"                                                                     ",
-	"                         “Be Better Than That”                       ",
+	"                     “Change is the only Constant”                   ",
 	"                                                                     ",
 	"                                                                     ",
 }
@@ -290,10 +302,6 @@ require("lsp_lines").setup()
 
 -- https://github.com/j-hui/fidget.nvim
 require("fidget").setup({})
-
-local o = vim.o
-local g = vim.g
-local api = vim.api
 
 local function nnoremap(key, cmd)
 	api.nvim_set_keymap("n", key, cmd, { noremap = true })
