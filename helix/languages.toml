@@ -1,0 +1,21 @@
+[[language]]
+name = "html"
+formatter = { command = 'prettier', args = ["./prettierrc"] }
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["./prettierrc"] }
+
+[[language]]
+name = "css"
+formatter = { command = 'prettier', args = ["./prettierrc"] }
+
+[[language]]
+name = "javascript"
+formatter = { command = 'prettier', args = ["./prettierrc"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+formatter = { command = 'prettier', args = ["./prettierrc"] }
+auto-format = true

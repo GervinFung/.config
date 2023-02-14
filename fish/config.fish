@@ -48,3 +48,8 @@ set -g fish_pager_color_description $comment
 # This is needed to solve Powerline not being rendered inside tmux
 # Refer https://github.com/gpakosz/.tmux/issues/171#issuecomment-426048355
 set -gx LC_ALL en_US.UTF-8
+
+# pnpm
+set -gx PNPM_HOME "/home/gervin/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end

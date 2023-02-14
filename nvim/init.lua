@@ -43,9 +43,6 @@ require("diffview").setup({
 })
 
 require("nvim-tree").setup({
-	view = {
-		width = 40,
-	},
 	git = {
 		enable = true,
 		ignore = false,
@@ -180,7 +177,7 @@ lspconfig.tsserver.setup({
 lspconfig.rust_analyzer.setup(lsp_options)
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-lspconfig.sumneko_lua.setup({
+lspconfig.lua_ls.setup({
 	settings = {
 		on_attach,
 		capabilities,
@@ -211,43 +208,6 @@ lspconfig.graphql.setup({
 	capabilities,
 	filetypes = { "graphql", "typescriptreact", "javascriptreact", "typescript" },
 })
-
--- dashboard nvim
-local dashboard = require("dashboard")
-dashboard.session_directory = "~/.config/nvim/.sessions"
-dashboard.custom_center = {
-	{ icon = "  ", desc = "Find Git File             leader p  ", action = "Telescope git_files" },
-	{ icon = "  ", desc = "Find Word                 leader s  ", action = "Telescope live_grep" },
-	{ icon = "  ", desc = "Buffer                    leader b  ", action = "Telescope buffers" },
-	{ icon = "  ", desc = "Close Buffer        leader shift b  ", action = "Telescope marks" },
-	{ icon = "  ", desc = "New Directory              shift a  ", action = "DashboardNewFile" },
-	{ icon = "  ", desc = "Update Plugins            leader u  ", action = "PackerUpdate" },
-	{ icon = "☮  ", desc = "MD Preview                leader m  ", action = "MarkdownPreview" },
-	{ icon = "  ", desc = "Exit                      leader q  ", action = "Exit" },
-}
-
-dashboard.default_banner = nil
-
-dashboard.custom_footer = { "", "N E O V I M" }
-
-dashboard.custom_header = {
-	"             ./oydN:                            :Ndyo/-`             ",
-	"        `:+ydNMMMMMMs                            oMMMMMMNdy+:`       ",
-	"    ./sdNMMMMMMMMMMMNs.                        .oNMMMMMMMMMMMNds/.   ",
-	" `ohhdNMMMMMMMMMMMMMMMNo.        `  `        .omMMMMMMMMMMMMMMMNmhho.",
-	" .-.``.-/oydmMMMMMMMMMMMNs/-    .h  h.    -/sNMMMMMMMMMMMmdyo/-.```-.",
-	"           `.:mMMMMMMMMMMMMNd+- hM++Md -+dNMMMMMMMMMMMMN:.`          ",
-	"              -NMMMMMMMMMMMMMMNdMMMMMMdNMMMMMMMMMMMMMMN:             ",
-	"               .::://++ooymMMMMMMMMMMMMMMMMmhoo++//:::-              ",
-	"                          ./hNMMMMMMMMMMNh/.                         ",
-	"                             .+dNNNNNNd+-                            ",
-	"                                -::::-                               ",
-	"                                                                     ",
-	"                                                                     ",
-	"                     “Change is the only Constant”                   ",
-	"                                                                     ",
-	"                                                                     ",
-}
 
 -- https://github.com/lewis6991/gitsigns.nvim
 require("gitsigns").setup()

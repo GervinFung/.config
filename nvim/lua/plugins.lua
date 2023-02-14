@@ -26,7 +26,6 @@ Plug("iamcco/markdown-preview.nvim", { ["do"] = "cd app && yarn install --frozen
 Plug("phaazon/hop.nvim")
 Plug("navarasu/onedark.nvim")
 Plug("p00f/nvim-ts-rainbow")
-Plug("glepnir/dashboard-nvim")
 Plug("sbdchd/neoformat")
 Plug("lewis6991/gitsigns.nvim")
 Plug("kyazdani42/nvim-tree.lua")
