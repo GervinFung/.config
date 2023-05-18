@@ -1,5 +1,9 @@
 [user]
-  name = GervinFung
-  email = gervinfungdaxuen@gmail.com
+    name = GervinFung
+    email = gervinfungdaxuen@gmail.com
 [init]
 	defaultBranch = main
+[core]
+    pager = delta --light --side-by-side
+[interactive]
+    diffFilter = delta --color-only --features=interactive

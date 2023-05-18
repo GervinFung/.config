@@ -6,11 +6,5 @@ directory does not exists.
 To backup your existing config, consider renaming the folder. For example,
 
 ```sh
-mv ~/.config ~/.config_backup
-```
-
-## Installation
-
-```sh
-git clone https://github.com/GervinFung/.config.git ~/.config && cd nvim && make
+mv ~/.config ~/.config-backup
 ```
