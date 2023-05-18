@@ -1,5 +1,3 @@
-require("plugins")
-
 local o = vim.o
 local g = vim.g
 local api = vim.api
@@ -10,6 +8,9 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 	},
 	ensure_installed = "all",
+	indent = {
+		enable = true,
+	},
 	highlight = {
 		enable = true, -- false will disable the whole extension
 		disable = {}, -- list of language that will be disabled
@@ -21,12 +22,20 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
+-- https://phelipetls.github.io/posts/mdx-syntax-highlight-treesitter-nvim/
+vim.filetype.add({
+	extension = {
+		mdx = "mdx",
+	},
+})
+require("nvim-treesitter.parsers").filetype_to_parsername.mdx = "markdown"
+
 -- Autopair settings
 require("nvim-autopairs").setup({})
 
 -- lualine settings
 require("lualine").setup({
-	options = { theme = "onedark" },
+	options = { theme = "auto" },
 	sections = {
 		lualine_a = { { "filename", path = 1 } },
 		lualine_b = { "g:coc_status" },
@@ -73,6 +82,7 @@ require("luatab").setup({})
 require("hop").setup({ keys = "etovxqpdygfblzhckisuran", term_seq_bias = 0.5 })
 
 -- colorscheme
+-- https://github.com/navarasu/onedark.nvim
 local onedark = require("onedark")
 onedark.setup({
 	-- Main options --
@@ -88,6 +98,37 @@ onedark.setup({
 	},
 })
 onedark.load()
+local links = {
+	["@lsp.type.namespace"] = "@namespace",
+	["@lsp.type.type"] = "@type",
+	["@lsp.type.class"] = "@type",
+	["@lsp.type.enum"] = "@type",
+	["@lsp.type.interface"] = "@type",
+	["@lsp.type.struct"] = "@structure",
+	["@lsp.type.parameter"] = "@parameter",
+	["@lsp.type.variable"] = "@variable",
+	["@lsp.type.property"] = "@property",
+	["@lsp.type.enumMember"] = "@constant",
+	["@lsp.type.function"] = "@function",
+	["@lsp.type.method"] = "@method",
+	["@lsp.type.macro"] = "@macro",
+	["@lsp.type.decorator"] = "@function",
+}
+for newgroup, oldgroup in pairs(links) do
+	vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
+end
+
+-- https://github.com/folke/tokyonight.nvim
+require("tokyonight").setup({
+	styles = {
+		-- Style to be applied to different syntax groups
+		-- Value is any valid attr-list value for `:help nvim_set_hl`
+		comments = { italic = true },
+		keywords = { italic = true, bold = true },
+		functions = {},
+		variables = { bold = true },
+	},
+})
 
 -- https://github.com/NvChad/nvim-colorizer.lua
 require("colorizer").setup()
@@ -101,13 +142,19 @@ require("mason-lspconfig").setup()
 -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
 require("mason-tool-installer").setup({
 	ensure_installed = {
+		-- lsp
 		"lua-language-server",
-		"prettierd",
+		"typescript-language-server",
 		"rust-analyzer",
+		"graphql-language-service-cli",
+		"astro-language-server",
+		"tailwindcss-language-server",
+
+		-- formatter
+		"prettierd",
+		"google-java-format",
 		{ "sql-formatter", version = "4.0.2" },
 		"stylua",
-		"typescript-language-server",
-		"graphql-language-service-cli",
 	},
 
 	-- if set to true this will check each tool for updates. If updates
@@ -156,13 +203,13 @@ end
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lsp_options = {
-	on_attach,
-	capabilities,
+	on_attach = on_attach,
+	capabilities = capabilities,
 }
 
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local lspconfig = require("lspconfig")
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 lspconfig.tsserver.setup({
 	on_attach = lsp_options.on_attach,
 	capabilities = lsp_options.capabilities,
@@ -174,13 +221,16 @@ lspconfig.tsserver.setup({
 	},
 })
 
+lspconfig.astro.setup(lsp_options)
+
 lspconfig.rust_analyzer.setup(lsp_options)
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
+lspconfig.tailwindcss.setup(lsp_options)
+
 lspconfig.lua_ls.setup({
 	settings = {
-		on_attach,
-		capabilities,
+		on_attach = lsp_options.on_attach,
+		capabilities = lsp_options.capabilities,
 		Lua = {
 			runtime = {
 				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
@@ -198,14 +248,16 @@ lspconfig.lua_ls.setup({
 			telemetry = {
 				enable = false,
 			},
+			completion = {
+				callSnippet = "Replace",
+			},
 		},
 	},
 })
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#graphql
 lspconfig.graphql.setup({
-	on_attach = on_attach,
-	capabilities,
+	on_attach = lsp_options.on_attach,
+	capabilities = lsp_options.capabilities,
 	filetypes = { "graphql", "typescriptreact", "javascriptreact", "typescript" },
 })
 
@@ -214,8 +266,13 @@ require("gitsigns").setup()
 
 -- https://github.com/hrsh7th/nvim-cmp
 local cmp = require("cmp")
+local lspkind = require("lspkind")
 
 cmp.setup({
+	-- https://github.com/onsails/lspkind.nvim#option-2-nvim-cmp
+	formatting = {
+		format = lspkind.cmp_format(),
+	},
 	snippet = {
 		expand = function(args)
 			vim.fn["vsnip#anonymous"](args.body)
@@ -282,8 +339,8 @@ vim.cmd("autocmd BufNewFile,BufRead *.graphql set ft=graphql")
 -- Refer https://github.com/sbdchd/neoformat#basic-usage
 vim.cmd([[
 augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
 augroup END
 ]])
 
@@ -357,31 +414,15 @@ o.hidden = true -- to ensure terminal remains alive
 -- Markdown Preview
 g.mkdp_browser = "brave-browser"
 
-vim.cmd([[
-augroup dashboard_au
-     autocmd! * <buffer>
-     autocmd User dashboardReady let &l:stl = 'Dashboard'
-     autocmd User dashboardReady nnoremap <buffer> <leader>q <cmd>exit<CR>
-     autocmd User dashboardReady nnoremap <buffer> <leader>u <cmd>PackerUpdate<CR>
-     autocmd User dashboardReady nnoremap <buffer> <leader>l <cmd>SessionLoad<CR>
-augroup END
-]])
-
 -- tabline colors
-vim.cmd([[
-  hi TabLine guibg=#A89984
-  hi TabLineFill guibg=#3C3836
-]])
-
+vim.cmd("hi TabLineFill guibg=#3C3836")
 -- File Type
 -- Do not source the default filetype.vim
 g.did_load_filetypes = 1
 
 -- Treat dash as part of a word
 -- Refer https://vi.stackexchange.com/a/13813/31905
-vim.cmd([[
-    set iskeyword+=-
-]])
+vim.cmd("set iskeyword+=-")
 
 -- https://github.com/kyazdani42/nvim-tree.lua
 g.loaded = 1
