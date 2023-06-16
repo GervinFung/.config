@@ -1,4 +1,3 @@
--- Bootstrap packer, refer https://github.com/wbthomason/packer.nvim#bootstrapping
 vim.cmd([[
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -8,7 +7,10 @@ endif
 ]])
 
 local Plug = vim.fn["plug#"]
-vim.call("plug#begin", "~/.config/nvim/plugged")
+
+local config_path = vim.fn.stdpath('config')
+
+vim.call("plug#begin", config_path .. '/plugged')
 Plug("tpope/vim-commentary")
 Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
@@ -46,11 +48,3 @@ Plug("onsails/lspkind.nvim")
 Plug("https://git.sr.ht/~whynothugo/lsp_lines.nvim")
 Plug("j-hui/fidget.nvim")
 
-Plug("williamboman/mason.nvim")
-Plug("williamboman/mason-lspconfig.nvim")
-Plug("WhoIsSethDaniel/mason-tool-installer.nvim")
-
-Plug("NvChad/nvim-colorizer.lua")
-Plug("weilbith/nvim-code-action-menu")
-
-vim.call("plug#end")
