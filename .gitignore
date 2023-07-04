@@ -7,7 +7,6 @@
 !helix
 !i3
 !kitty
-!kitty/smoke-test.sh
 !nvim
 !picom
 !polybar
@@ -18,3 +17,4 @@
 !fish/conf.d
 !lsp
 !formatter
+!.gitattributes
