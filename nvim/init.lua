@@ -1,3 +1,5 @@
+require("plugins")
+
 local o = vim.o
 local g = vim.g
 local api = vim.api
