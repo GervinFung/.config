@@ -24,12 +24,6 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
--- https://phelipetls.github.io/posts/mdx-syntax-highlight-treesitter-nvim/
-vim.filetype.add({
-	extension = {
-		mdx = "mdx",
-	},
-})
 -- https://github.com/nvim-treesitter/nvim-treesitter#adding-parsers
 vim.treesitter.language.register("markdown", "mdx")
 
@@ -407,10 +401,7 @@ o.hidden = true -- to ensure terminal remains alive
 g.mkdp_browser = "brave-browser"
 
 -- tabline colors
-vim.cmd([[
-  hi TabLine guibg=#A89984
-  hi TabLineFill guibg=#3C3836
-]])
+vim.cmd("hi TabLineFill guibg=#3C3836")
 
 -- File Type
 -- Do not source the default filetype.vim
@@ -418,9 +409,7 @@ g.did_load_filetypes = 1
 
 -- Treat dash as part of a word
 -- Refer https://vi.stackexchange.com/a/13813/31905
-vim.cmd([[
-    set iskeyword+=-
-]])
+vim.cmd("set iskeyword+=-")
 
 -- https://github.com/kyazdani42/nvim-tree.lua
 g.loaded = 1
