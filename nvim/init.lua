@@ -30,7 +30,8 @@ vim.filetype.add({
 		mdx = "mdx",
 	},
 })
-require("nvim-treesitter.parsers").filetype_to_parsername.mdx = "markdown"
+-- https://github.com/nvim-treesitter/nvim-treesitter#adding-parsers
+vim.treesitter.language.register("markdown", "mdx")
 
 -- Autopair settings
 require("nvim-autopairs").setup({})
@@ -89,7 +90,7 @@ local onedark = require("onedark")
 onedark.setup({
 	-- Main options --
 	-- style - dark, darker, cool, deep, warm, warmer
-	style = "deep",
+	style = "darker",
 	transparent = true,
 	code_style = {
 		comments = "italic",
@@ -100,25 +101,6 @@ onedark.setup({
 	},
 })
 onedark.load()
-local links = {
-	["@lsp.type.namespace"] = "@namespace",
-	["@lsp.type.type"] = "@type",
-	["@lsp.type.class"] = "@type",
-	["@lsp.type.enum"] = "@type",
-	["@lsp.type.interface"] = "@type",
-	["@lsp.type.struct"] = "@structure",
-	["@lsp.type.parameter"] = "@parameter",
-	["@lsp.type.variable"] = "@variable",
-	["@lsp.type.property"] = "@property",
-	["@lsp.type.enumMember"] = "@constant",
-	["@lsp.type.function"] = "@function",
-	["@lsp.type.method"] = "@method",
-	["@lsp.type.macro"] = "@macro",
-	["@lsp.type.decorator"] = "@function",
-}
-for newgroup, oldgroup in pairs(links) do
-	vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
-end
 
 -- https://github.com/folke/tokyonight.nvim
 require("tokyonight").setup({
@@ -148,6 +130,7 @@ require("mason-tool-installer").setup({
 		"lua-language-server",
 		"typescript-language-server",
 		"rust-analyzer",
+		"marksman",
 		"graphql-language-service-cli",
 		"astro-language-server",
 		"tailwindcss-language-server",
@@ -223,9 +206,15 @@ lspconfig.tsserver.setup({
 	},
 })
 
+lspconfig.dartls.setup(lsp_options)
+
+lspconfig.pyright.setup(lsp_options)
+
 lspconfig.astro.setup(lsp_options)
 
 lspconfig.rust_analyzer.setup(lsp_options)
+
+lspconfig.marksman.setup(lsp_options)
 
 lspconfig.tailwindcss.setup(lsp_options)
 
@@ -257,6 +246,7 @@ lspconfig.lua_ls.setup({
 	},
 })
 
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#graphql
 lspconfig.graphql.setup({
 	on_attach = lsp_options.on_attach,
 	capabilities = lsp_options.capabilities,
@@ -417,14 +407,20 @@ o.hidden = true -- to ensure terminal remains alive
 g.mkdp_browser = "brave-browser"
 
 -- tabline colors
-vim.cmd("hi TabLineFill guibg=#3C3836")
+vim.cmd([[
+  hi TabLine guibg=#A89984
+  hi TabLineFill guibg=#3C3836
+]])
+
 -- File Type
 -- Do not source the default filetype.vim
 g.did_load_filetypes = 1
 
 -- Treat dash as part of a word
 -- Refer https://vi.stackexchange.com/a/13813/31905
-vim.cmd("set iskeyword+=-")
+vim.cmd([[
+    set iskeyword+=-
+]])
 
 -- https://github.com/kyazdani42/nvim-tree.lua
 g.loaded = 1
