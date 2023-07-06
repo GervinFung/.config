@@ -44,6 +44,7 @@
   },
   "editor.fontFamily": "JetBrains Mono",
   "editor.fontLigatures": true,
-  "workbench.colorTheme": "One Dark Pro Monokai Darker Reloaded",
-  "editor.semanticHighlighting.enabled": true
+  "workbench.colorTheme": "Default Dark Modern",
+  "editor.semanticHighlighting.enabled": true,
+  "markdown-preview-enhanced.previewTheme": "github-dark.css"
 }

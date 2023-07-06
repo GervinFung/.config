@@ -18,3 +18,7 @@ set -gx LC_ALL en_US.UTF-8
 set -gx PNPM_HOME "/home/gervin/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
+
+# Wasmer
+export WASMER_DIR="/home/gervin/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
