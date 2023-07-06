@@ -1,4 +1,3 @@
--- Bootstrap packer, refer https://github.com/wbthomason/packer.nvim#bootstrapping
 vim.cmd([[
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -8,7 +7,10 @@ endif
 ]])
 
 local Plug = vim.fn["plug#"]
-vim.call("plug#begin", "~/.config/nvim/plugged")
+
+local config_path = vim.fn.stdpath('config')
+
+vim.call("plug#begin", config_path .. '/plugged')
 Plug("tpope/vim-commentary")
 Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
@@ -22,7 +24,7 @@ Plug("windwp/nvim-ts-autotag")
 Plug("windwp/nvim-autopairs")
 Plug("hoob3rt/lualine.nvim")
 Plug("alvarosevilla95/luatab.nvim")
-Plug("iamcco/markdown-preview.nvim", { ["do"] = "cd app && yarn install --frozen-lockfile" })
+Plug("iamcco/markdown-preview.nvim", { ["do"] = "cd app && pnpm i --frozen-lockfile" })
 Plug("phaazon/hop.nvim")
 Plug("navarasu/onedark.nvim")
 Plug("folke/tokyonight.nvim", { ["branch"] = "main" })
