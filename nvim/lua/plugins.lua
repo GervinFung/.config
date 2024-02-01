@@ -8,9 +8,9 @@ endif
 
 local Plug = vim.fn["plug#"]
 
-local config_path = vim.fn.stdpath('config')
+local config_path = vim.fn.stdpath("config")
 
-vim.call("plug#begin", config_path .. '/plugged')
+vim.call("plug#begin", config_path .. "/plugged")
 Plug("tpope/vim-commentary")
 Plug("tpope/vim-fugitive")
 Plug("tpope/vim-surround")
@@ -54,5 +54,8 @@ Plug("WhoIsSethDaniel/mason-tool-installer.nvim")
 
 Plug("NvChad/nvim-colorizer.lua")
 Plug("weilbith/nvim-code-action-menu")
+
+-- https://github.com/github/copilot.vim
+Plug("github/copilot.vim")
 
 vim.call("plug#end")
