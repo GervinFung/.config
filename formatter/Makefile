@@ -1,5 +1,12 @@
-install-package:
+install:
+	make sql
+	make prettier
+
+i:
 	sudo npm i -g $(package)
 
-install-formatter:
-	make install-package package="@fsouza/prettierd"
+sql:
+	make i package="sql-formatter@4.0.2"
+
+prettier:
+	make i package="@fsouza/prettierd"
