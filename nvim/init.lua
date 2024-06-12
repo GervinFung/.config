@@ -32,20 +32,46 @@ require("nvim-autopairs").setup({})
 
 -- lualine settings
 require("lualine").setup({
-	options = { theme = "auto" },
+	options = {
+		theme = "auto",
+	},
 	sections = {
-		lualine_a = { { "filename", path = 1 } },
-		lualine_b = { "g:coc_status" },
-		lualine_c = { { "diagnostics", sources = { "nvim_lsp" } } },
+		lualine_a = {
+			{
+				"filename",
+				path = 1,
+			},
+		},
+		lualine_b = {
+			"g:coc_status",
+		},
+		lualine_c = {
+			{
+				"diagnostics",
+				sources = {
+					"nvim_lsp",
+				},
+			},
+		},
 		lualine_x = {},
-		lualine_y = { "progress" },
-		lualine_z = { "branch" },
+		lualine_y = {
+			"progress",
+		},
+		lualine_z = {
+			"branch",
+		},
 	},
 })
 
 -- diffview settings
 require("diffview").setup({
-	file_panel = { win_config = { tree_options = { flatten_dirs = false } } },
+	file_panel = {
+		win_config = {
+			tree_options = {
+				flatten_dirs = false,
+			},
+		},
+	},
 })
 
 require("nvim-tree").setup({
@@ -68,6 +94,7 @@ require("telescope").setup({
 		file_ignore_patterns = {
 			"node_modules",
 			"build",
+			"dist",
 		},
 	},
 })
@@ -76,7 +103,10 @@ require("telescope").setup({
 require("luatab").setup({})
 
 -- https://github.com/phaazon/hop.nvim
-require("hop").setup({ keys = "etovxqpdygfblzhckisuran", term_seq_bias = 0.5 })
+require("hop").setup({
+	keys = "etovxqpdygfblzhckisuran",
+	term_seq_bias = 0.5,
+})
 
 -- colorscheme
 -- https://github.com/navarasu/onedark.nvim
@@ -101,15 +131,22 @@ require("tokyonight").setup({
 	styles = {
 		-- Style to be applied to different syntax groups
 		-- Value is any valid attr-list value for `:help nvim_set_hl`
-		comments = { italic = true },
-		keywords = { italic = true, bold = true },
+		comments = {
+			italic = true,
+		},
+		keywords = {
+			italic = true,
+			bold = true,
+		},
 		functions = {},
-		variables = { bold = true },
+		variables = {
+			bold = true,
+		},
 	},
 })
 
 -- https://github.com/NvChad/nvim-colorizer.lua
-require("colorizer").setup()
+require("colorizer").setup({})
 
 -- https://github.com/williamboman/mason.nvim#installation
 require("mason").setup({})
@@ -132,7 +169,10 @@ require("mason-tool-installer").setup({
 		-- formatter
 		"prettierd",
 		"google-java-format",
-		{ "sql-formatter", version = "4.0.2" },
+		{
+			"sql-formatter",
+			version = "4.0.2",
+		},
 		"stylua",
 	},
 
@@ -163,7 +203,11 @@ local on_attach = function(_, bufnr)
 
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+	local bufopts = {
+		noremap = true,
+		silent = true,
+		buffer = bufnr,
+	}
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
@@ -212,10 +256,14 @@ lspconfig.marksman.setup(lsp_options)
 
 lspconfig.tailwindcss.setup(lsp_options)
 
+lspconfig.svelte.setup(lsp_options)
+
+lspconfig.volar.setup(lsp_options)
+
 lspconfig.lua_ls.setup({
+	on_attach = lsp_options.on_attach,
+	capabilities = lsp_options.capabilities,
 	settings = {
-		on_attach = lsp_options.on_attach,
-		capabilities = lsp_options.capabilities,
 		Lua = {
 			runtime = {
 				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
@@ -223,7 +271,9 @@ lspconfig.lua_ls.setup({
 			},
 			diagnostics = {
 				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
+				globals = {
+					"vim",
+				},
 			},
 			workspace = {
 				-- Make the server aware of Neovim runtime files
@@ -244,7 +294,12 @@ lspconfig.lua_ls.setup({
 lspconfig.graphql.setup({
 	on_attach = lsp_options.on_attach,
 	capabilities = lsp_options.capabilities,
-	filetypes = { "graphql", "typescriptreact", "javascriptreact", "typescript" },
+	filetypes = {
+		"graphql",
+		"typescriptreact",
+		"javascriptreact",
+		"typescript",
+	},
 })
 
 -- https://github.com/lewis6991/gitsigns.nvim
@@ -286,7 +341,9 @@ cmp.setup({
 cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = "buffer" },
+		{
+			name = "buffer",
+		},
 	},
 })
 
@@ -294,9 +351,13 @@ cmp.setup.cmdline({ "/", "?" }, {
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = "path" },
+		{
+			name = "path",
+		},
 	}, {
-		{ name = "cmdline" },
+		{
+			name = "cmdline",
+		},
 	}),
 })
 
@@ -331,7 +392,7 @@ augroup END
 ]])
 
 -- key mappings
-nnoremap("<CR>", ":wa<CR>")
+nnoremap("<CR>", ":wa!<CR>")
 nnoremap("<C-j>", ":cnext<CR>")
 nnoremap("<C-k>", ":cprev<CR>")
 -- Open [g]it dashboard

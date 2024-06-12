@@ -1,10 +1,11 @@
 # https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers
 install:
-	make json
 	make ts
-	make svelete
+	make svelte
 	make elm
 	make gql
+	make vue
+	make rust
 
 i:
 	sudo npm i -g $(package)
@@ -12,7 +13,7 @@ i:
 ts:
 	make i package="typescript typescript-language-server"
 
-svelete:
+svelte:
 	make i package="svelte-language-server"
 
 astro:
@@ -29,3 +30,6 @@ tailwindcss:
 
 rust:
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+vue:
+	make i package="@vue/language-server"
