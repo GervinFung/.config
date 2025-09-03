@@ -8,4 +8,4 @@
 [interactive]
     diffFilter = delta --color-only --features=interactive
 [core]
-    editor = vim
+    editor = vi
