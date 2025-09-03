@@ -1,16 +1,31 @@
+# https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers
 install:
-	make install-typescript &&\
-		make install-rust &&\
-		make install-graphql
+	make json
+	make ts
+	make svelete
+	make elm
+	make gql
 
-install-package:
+i:
 	sudo npm i -g $(package)
 
-install-typescript:
-	make install-package package="tsc"
+json:
+	make i package="vscode-langservers-extracted"
 
-install-graphql:
-	make install-package package="graphql-language-service-cli"
+ts:
+	make i package="typescript typescript-language-server"
 
-install-rust:
-	rustup component add rust-src
+svelete:
+	make i package="svelte-language-server"
+
+astro:
+	make i package="@astrojs/language-server"
+
+elm:
+	make i package="elm elm-test elm-format @elm-tooling/elm-language-server"
+
+gql:
+	make i package="graphql-language-service-cli"
+
+tailwindcss:
+	make i package="@tailwindcss/language-server"

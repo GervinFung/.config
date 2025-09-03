@@ -331,7 +331,7 @@ augroup END
 ]])
 
 -- key mappings
-nnoremap("<CR>", ":wa<CR>")
+nnoremap("<CR>", ":wa!<CR>")
 nnoremap("<C-j>", ":cnext<CR>")
 nnoremap("<C-k>", ":cprev<CR>")
 -- Open [g]it dashboard
