@@ -7,3 +7,5 @@
     pager = delta --light --side-by-side
 [interactive]
     diffFilter = delta --color-only --features=interactive
+[core]
+    editor = vim
