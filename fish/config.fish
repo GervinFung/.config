@@ -22,3 +22,7 @@ set -gx PATH "$PNPM_HOME" $PATH
 # Wasmer
 export WASMER_DIR="/home/gervin/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+if status is-interactive
+    fastfetch
+end
