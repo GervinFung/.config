@@ -11,7 +11,7 @@ install:
 	make rust
 
 i:
-	sudo npm i -g $(package)
+	npm i -g $(package)
 
 json:
 	make i package="vscode-langservers-extracted"
