@@ -3,9 +3,10 @@ require("plugins")
 local o = vim.o
 local g = vim.g
 local api = vim.api
+local fn = vim.fn
 
 -- Tree sitter settings
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.config").setup({
 	autotag = {
 		enable = true,
 	},
@@ -316,7 +317,7 @@ cmp.setup({
 	},
 	snippet = {
 		expand = function(args)
-			vim.fn["vsnip#anonymous"](args.body)
+			fn["vsnip#anonymous"](args.body)
 		end,
 	},
 	window = {
@@ -459,7 +460,38 @@ o.hidden = true -- to ensure terminal remains alive
 
 -- https://github.com/iamcco/markdown-preview.nvim
 -- Markdown Preview
-g.mkdp_browser = "brave-browser"
+local function markdown_preview_browser_cmd(url)
+	if fn.has("wsl") == 1 then
+		local brave = "/mnt/c/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
+		if fn.executable(brave) == 1 then
+			return { brave, url }
+		end
+		return { "explorer.exe", url }
+	elseif fn.has("mac") == 1 then
+		if fn.isdirectory("/Applications/Brave Browser.app") == 1 then
+			return { "open", "-a", "Brave Browser", url }
+		end
+		return { "open", url }
+	elseif fn.has("win32") == 1 then
+		return { "cmd.exe", "/c", "start", "", url }
+	end
+	if fn.executable("brave-browser") == 1 then
+		return { "brave-browser", url }
+	end
+	return { "xdg-open", url }
+end
+
+_G.markdown_preview_open = function(url)
+	fn.jobstart(markdown_preview_browser_cmd(url), { detach = true })
+end
+
+vim.cmd([[
+function! MarkdownPreviewOpen(url)
+	call v:lua.markdown_preview_open(a:url)
+endfunction
+]])
+g.mkdp_browserfunc = "MarkdownPreviewOpen"
+g.mkdp_echo_preview_url = 1 -- print URL as a fallback
 
 -- tabline colors
 vim.cmd("hi TabLineFill guibg=#3C3836")

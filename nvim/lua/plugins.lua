@@ -6,9 +6,11 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 ]])
 
-local Plug = vim.fn["plug#"]
+local fn = vim.fn
 
-local config_path = vim.fn.stdpath("config")
+local Plug = fn["plug#"]
+
+local config_path = fn.stdpath("config")
 
 vim.call("plug#begin", config_path .. "/plugged")
 Plug("tpope/vim-commentary")
@@ -24,8 +26,8 @@ Plug("windwp/nvim-ts-autotag")
 Plug("windwp/nvim-autopairs")
 Plug("hoob3rt/lualine.nvim")
 Plug("alvarosevilla95/luatab.nvim")
-Plug("iamcco/markdown-preview.nvim", { ["do"] = "cd app && npx --yes yarn install --frozen-lockfile" })
-Plug("phaazon/hop.nvim")
+Plug("iamcco/markdown-preview.nvim", { ["do"] = ":call mkdp#util#install()" })
+Plug("smoka7/hop.nvim")
 Plug("navarasu/onedark.nvim")
 Plug("folke/tokyonight.nvim", { ["branch"] = "main" })
 Plug("Shatur/neovim-ayu")
