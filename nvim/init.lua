@@ -153,7 +153,13 @@ require("colorizer").setup({})
 require("mason").setup({})
 
 -- https://github.com/williamboman/mason-lspconfig.nvim#setup
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+	automatic_enable = {
+		exclude = {
+			"stylua",
+		},
+	},
+})
 
 -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
 require("mason-tool-installer").setup({
@@ -196,6 +202,8 @@ require("mason-tool-installer").setup({
 	start_delay = 3000, -- 3 second delay
 })
 
+local lsp = vim.lsp
+
 -- use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr)
@@ -209,22 +217,22 @@ local on_attach = function(_, bufnr)
 		silent = true,
 		buffer = bufnr,
 	}
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-	vim.keymap.set("n", "gh", vim.lsp.buf.hover, bufopts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+	vim.keymap.set("n", "gD", lsp.buf.declaration, bufopts)
+	vim.keymap.set("n", "gd", lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "gh", lsp.buf.hover, bufopts)
+	vim.keymap.set("n", "gi", lsp.buf.implementation, bufopts)
+	vim.keymap.set("i", "<C-k>", lsp.buf.signature_help, bufopts)
+	vim.keymap.set("n", "<space>wa", lsp.buf.add_workspace_folder, bufopts)
+	vim.keymap.set("n", "<space>wr", lsp.buf.remove_workspace_folder, bufopts)
 	vim.keymap.set("n", "<space>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		print(vim.inspect(lsp.buf.list_workspace_folders()))
 	end, bufopts)
-	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, bufopts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+	vim.keymap.set("n", "<space>D", lsp.buf.type_definition, bufopts)
+	vim.keymap.set("n", "<space>r", lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "gr", lsp.buf.references, bufopts)
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(lsp.protocol.make_client_capabilities())
 
 local lsp_options = {
 	on_attach = on_attach,
@@ -232,11 +240,10 @@ local lsp_options = {
 }
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-local lspconfig = require("lspconfig")
+-- Shared defaults for every server
+lsp.config("*", lsp_options)
 
-lspconfig.tsserver.setup({
-	on_attach = lsp_options.on_attach,
-	capabilities = lsp_options.capabilities,
+lsp.config("ts_ls", {
 	init_options = {
 		preferences = {
 			-- Refer https://github.com/typescript-language-server/typescript-language-server/pull/218#issue-915599035
@@ -245,25 +252,7 @@ lspconfig.tsserver.setup({
 	},
 })
 
-lspconfig.dartls.setup(lsp_options)
-
-lspconfig.pyright.setup(lsp_options)
-
-lspconfig.astro.setup(lsp_options)
-
-lspconfig.rust_analyzer.setup(lsp_options)
-
-lspconfig.marksman.setup(lsp_options)
-
-lspconfig.tailwindcss.setup(lsp_options)
-
-lspconfig.svelte.setup(lsp_options)
-
-lspconfig.volar.setup(lsp_options)
-
-lspconfig.lua_ls.setup({
-	on_attach = lsp_options.on_attach,
-	capabilities = lsp_options.capabilities,
+lsp.config("lua_ls", {
 	settings = {
 		Lua = {
 			runtime = {
@@ -292,15 +281,27 @@ lspconfig.lua_ls.setup({
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#graphql
-lspconfig.graphql.setup({
-	on_attach = lsp_options.on_attach,
-	capabilities = lsp_options.capabilities,
+lsp.config("graphql", {
 	filetypes = {
 		"graphql",
 		"typescriptreact",
 		"javascriptreact",
 		"typescript",
 	},
+})
+
+lsp.enable({
+	"ts_ls",
+	"dartls",
+	"pyright",
+	"astro",
+	"rust_analyzer",
+	"marksman",
+	"tailwindcss",
+	"svelte",
+	"vue_ls",
+	"lua_ls",
+	"graphql",
 })
 
 -- https://github.com/lewis6991/gitsigns.nvim
